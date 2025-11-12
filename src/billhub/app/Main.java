@@ -64,47 +64,5 @@ public class Main {
             return;
         }
 
-/*        // === Interactive Menu Mode ===
-        Scanner sc = new Scanner(System.in);
-        while (true) {
-            System.out.println("\n=== Bill Hub (Midterm) ===");
-            System.out.println("1. List all bills");
-            System.out.println("2. List unpaid bills");
-            System.out.println("3. Mark bill as PAID");
-            System.out.println("4. Add new bill");
-            System.out.println("5. List providers");
-            System.out.println("6. View notices");
-            System.out.println("0. Exit");
-            System.out.print("Choose: ");
-
-            String choice = sc.nextLine().trim();
-            try {
-                switch (choice) {
-                    case "1" -> service.listAllBills();
-                    case "2" -> service.listUnpaidBills();
-                    case "3" -> {
-                        System.out.print("Bill ID: ");
-                        service.markPaid(sc.nextLine().trim());
-                    }
-                    case "4" -> {
-                        System.out.print("New ID: ");
-                        String id = sc.nextLine().trim();
-                        System.out.print("Provider name: ");
-                        String prov = sc.nextLine().trim();
-                        System.out.print("Amount: ");
-                        String amount = sc.nextLine().trim();
-                        System.out.print("Due date (YYYY-MM-DD): ");
-                        String due = sc.nextLine().trim();
-                        service.addBill(id, prov, amount, due);
-                    }
-                    case "5" -> service.listProviders();
-                    case "6" -> service.listNotices();
-                    case "0" -> { System.out.println("Bye!"); return; }
-                    default -> System.out.println("Invalid option.");
-                }
-            } catch (InvalidBillDataException | ProviderNotFoundException e) {
-                System.out.println("Error: " + e.getMessage());
-            }
-        }*/
     }
 }
