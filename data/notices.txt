@@ -1,0 +1,2 @@
+1,Aquatim,Water shutoff 10:00-14:00 in your area,2025-11-03,2025-11-03
+2,PPC,Power maintenance Friday 08:00-09:00,2025-11-04,2025-11-04
