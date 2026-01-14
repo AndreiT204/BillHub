@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import LoginScene from './LoginScene';
 import DashboardScene from './DashboardScene';
 import NoticeScene from './NoticeScene';
-import ProviderDashboardScene from './ProviderDashboardScene'; // <--- MAKE SURE THIS IS HERE
+import ProviderDashboardScene from './ProviderDashboardScene';
 import AdminDashboardScene from './AdminDashboardScene';
 function App() {
     return (
@@ -17,7 +17,7 @@ function App() {
                     <Route path="/" element={<LoginScene />} />
                     <Route path="/dashboard" element={<DashboardScene />} />
                     <Route path="/notices" element={<NoticeScene />} />
-                    <Route path="/provider" element={<ProviderDashboardScene />} /> {/* <--- AND THIS */}
+                    <Route path="/provider" element={<ProviderDashboardScene />} />
                     <Route path="/admin" element={<AdminDashboardScene />} />
                 </Routes>
             </div>

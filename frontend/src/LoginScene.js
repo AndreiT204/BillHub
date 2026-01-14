@@ -1,16 +1,15 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 function LoginScene() {
     const navigate = useNavigate();
 
-    //Toggle between Login and Register
     const [isRegistering, setIsRegistering] = useState(false);
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [role, setRole] = useState('USER'); // Default to Standard User
+    const [role, setRole] = useState('USER');
 
     const handleAction = () => {
         if (!username || !password) {

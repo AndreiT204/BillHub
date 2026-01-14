@@ -9,17 +9,16 @@ import java.net.Socket;
 @Service
 public class SocketServerService {
 
-    private static final int PORT = 9090; // Different port from the Web App (8080)
+    private static final int PORT = 9090;
 
-    @PostConstruct // This ensures the server starts automatically
+    @PostConstruct
     public void startServer() {
-        // We run this in a NEW Thread so it doesn't freeze the main website
         new Thread(() -> {
             try (ServerSocket serverSocket = new ServerSocket(PORT)) {
                 System.out.println("[Socket] Admin Server listening on port " + PORT);
 
                 while (true) {
-                    Socket clientSocket = serverSocket.accept(); // Wait for connection
+                    Socket clientSocket = serverSocket.accept();
                     handleClient(clientSocket);
                 }
             } catch (IOException e) {
@@ -33,10 +32,8 @@ public class SocketServerService {
                 BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                 PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true)
         ) {
-            // Read the command from the client
             String command = in.readLine();
 
-            // Respond based on the command
             if ("STATUS".equalsIgnoreCase(command)) {
                 out.println("OK: BillHub Server is RUNNING.");
             } else {

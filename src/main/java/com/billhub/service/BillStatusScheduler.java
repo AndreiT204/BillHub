@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Component
-@EnableScheduling // This turns on the "Automatic Timer" feature
+@EnableScheduling
 public class BillStatusScheduler {
 
     private final BillRepository billRepository;
@@ -21,7 +21,6 @@ public class BillStatusScheduler {
         this.billRepository = billRepository;
     }
 
-    // This method runs automatically every 60 seconds (60000 milliseconds)
     @Scheduled(fixedRate = 60000)
     public void checkOverdueBills() {
         System.out.println("[Thread Log] Checking for overdue bills...");
@@ -30,10 +29,8 @@ public class BillStatusScheduler {
         LocalDate today = LocalDate.now();
 
         for (Bill bill : allBills) {
-            // Logic: If bill is NOT paid AND due date is in the past
             if (!bill.isPaid() && bill.getDueDate().isBefore(today)) {
                 System.out.println("ALERT: Bill ID " + bill.getId() + " is overdue!");
-                // Here you could add logic to send an email or add a fine
             }
         }
     }

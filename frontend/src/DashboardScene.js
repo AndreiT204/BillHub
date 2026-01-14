@@ -103,7 +103,6 @@ function DashboardScene() {
                 </tbody>
             </table>
 
-            {/* --- NEW: DELETE ACCOUNT BUTTON (AT THE BOTTOM) --- */}
             <div style={{ marginTop: '50px', borderTop: '1px solid #eee', paddingTop: '20px', textAlign: 'center' }}>
                 <button
                     onClick={handleDeleteAccount}

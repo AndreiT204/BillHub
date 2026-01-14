@@ -5,16 +5,14 @@ import { useNavigate } from 'react-router-dom';
 function ProviderDashboardScene() {
     const navigate = useNavigate();
 
-    // 1. STATE VARIABLES
     const [providerName, setProviderName] = useState('');
-    const [availableUsers, setAvailableUsers] = useState([]); // <--- NEW: Stores list of users
+    const [availableUsers, setAvailableUsers] = useState([]);
 
     const [amount, setAmount] = useState('');
     const [dueDate, setDueDate] = useState('');
     const [targetUser, setTargetUser] = useState('');
     const [noticeMsg, setNoticeMsg] = useState('');
 
-    // 2. ON LOAD: Get Provider Name AND List of Customers
     useEffect(() => {
         const loggedInUser = localStorage.getItem('loggedInUser');
         if (!loggedInUser) {
@@ -23,10 +21,8 @@ function ProviderDashboardScene() {
             setProviderName(loggedInUser);
         }
 
-        // --- NEW: FETCH USERS FOR THE DROPDOWN ---
         axios.get('http://localhost:8080/api/auth/users')
             .then(res => {
-                // Only show "Standard Users" in the list (don't bill other Providers!)
                 const customers = res.data.filter(u => u.role === 'USER');
                 setAvailableUsers(customers);
             })
@@ -87,11 +83,11 @@ function ProviderDashboardScene() {
 
     return (
         <div style={{ maxWidth: '600px', margin: '40px auto', padding: '20px', border: '1px solid #ccc', borderRadius: '10px' }}>
-            <h2>👨‍💼 Provider Portal: <span style={{color: 'blue'}}>{providerName}</span></h2>
+            <h2>Provider Portal: <span style={{color: 'blue'}}>{providerName}</span></h2>
 
             <hr />
 
-            <h3>📄 Issue New Bill</h3>
+            <h3>Issue New Bill</h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
 
                 <label style={{fontSize: '0.9em', color: '#555'}}>Customer Username:</label>
@@ -130,7 +126,7 @@ function ProviderDashboardScene() {
 
             <hr style={{ margin: '30px 0' }} />
 
-            <h3>⚠️ Issue Service Notice</h3>
+            <h3>Issue Service Notice</h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                 <textarea
                     placeholder="e.g. Power outage scheduled..."
@@ -152,7 +148,7 @@ function ProviderDashboardScene() {
                     onClick={handleDeleteAccount}
                     style={{ padding: '10px 20px', backgroundColor: '#dc3545', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer' }}
                 >
-                    🗑️ Delete Provider Account
+                    Delete Provider Account
                 </button>
             </div>
         </div>

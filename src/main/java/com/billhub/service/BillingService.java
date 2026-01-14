@@ -37,7 +37,7 @@ public class BillingService {
         if (bill.getAmount() < 0) {
             throw new IllegalArgumentException("Bill amount cannot be negative");
         }
-        return billRepo.save(bill); // Saves to Database
+        return billRepo.save(bill);
     }
 
     public Bill payBill(Long billId) {

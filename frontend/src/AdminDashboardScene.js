@@ -6,7 +6,6 @@ function AdminDashboardScene() {
     const navigate = useNavigate();
     const [users, setUsers] = useState([]);
 
-    // View Mode: 'LIST', 'USER_BILLS', 'PROVIDER_NOTICES'
     const [viewMode, setViewMode] = useState('LIST');
     const [selectedEntity, setSelectedEntity] = useState(null);
     const [entityItems, setEntityItems] = useState([]);
