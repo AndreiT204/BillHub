@@ -9,7 +9,7 @@
         <relativePath/> </parent>
 
     <groupId>com.billhub</groupId>
-    <artifactId>billhub</artifactId>
+    <artifactId>BillHub</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Bill Hub</name>
     <description>Lab 13 Final Project</description>

@@ -73,7 +73,6 @@ function AdminDashboardScene() {
                                 >
                                     {u.username}
                                 </strong>
-                                <br/><span style={{fontSize:'0.8em', color:'#666'}}>Pass: {u.password}</span>
                             </div>
                             <button onClick={() => deleteAccount(u.username)} style={{background:'red', color:'white', border:'none', cursor:'pointer'}}>X</button>
                         </div>
@@ -91,7 +90,6 @@ function AdminDashboardScene() {
                                 >
                                     {u.username}
                                 </strong>
-                                <br/><span style={{fontSize:'0.8em', color:'#666'}}>Pass: {u.password}</span>
                             </div>
                             <button onClick={() => deleteAccount(u.username)} style={{background:'red', color:'white', border:'none', cursor:'pointer'}}>X</button>
                         </div>
