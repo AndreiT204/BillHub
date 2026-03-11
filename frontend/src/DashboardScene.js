@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import './Dashboard.css';
+import API_BASE_URL from './api';
 
 function DashboardScene() {
     const navigate = useNavigate();
@@ -20,13 +21,15 @@ function DashboardScene() {
     }, [navigate]);
 
     const fetchBills = (username) => {
-        axios.get(`http://localhost:8080/api/bills/${username}`)
+        // Updated to use dynamic API_BASE_URL
+        axios.get(`${API_BASE_URL}/api/bills/${username}`)
             .then(response => setBills(response.data))
             .catch(error => console.error("Error fetching bills:", error));
     };
 
     const handlePay = (billId) => {
-        axios.post(`http://localhost:8080/api/bills/${billId}/pay`)
+        // Updated to use dynamic API_BASE_URL
+        axios.post(`${API_BASE_URL}/api/bills/${billId}/pay`)
             .then(response => {
                 alert("Success! Bill paid.");
                 fetchBills(currentUser);
@@ -38,7 +41,8 @@ function DashboardScene() {
     const handleDeleteAccount = () => {
         const confirmDelete = window.confirm("Are you sure? This cannot be undone.");
         if (confirmDelete) {
-            axios.delete(`http://localhost:8080/api/auth/${currentUser}`)
+            // Updated to use dynamic API_BASE_URL
+            axios.delete(`${API_BASE_URL}/api/auth/${currentUser}`)
                 .then(() => {
                     alert("Account Deleted.");
                     localStorage.clear(); // Clear session

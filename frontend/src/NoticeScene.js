@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import API_BASE_URL from './api';
 
 function NoticeScene() {
     const [notices, setNotices] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:8080/api/notices')
+        // Updated to use dynamic API_BASE_URL
+        axios.get(`${API_BASE_URL}/api/notices`)
             .then(response => setNotices(response.data))
             .catch(error => console.error("Error fetching notices:", error));
     }, []);

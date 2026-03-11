@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import API_BASE_URL from './api';
 
 function ProviderDashboardScene() {
     const navigate = useNavigate();
@@ -21,7 +22,8 @@ function ProviderDashboardScene() {
             setProviderName(loggedInUser);
         }
 
-        axios.get('http://localhost:8080/api/auth/users')
+        // Updated to use dynamic API_BASE_URL
+        axios.get(`${API_BASE_URL}/api/auth/users`)
             .then(res => {
                 const customers = res.data.filter(u => u.role === 'USER');
                 setAvailableUsers(customers);
@@ -44,7 +46,8 @@ function ProviderDashboardScene() {
             provider: providerName
         };
 
-        axios.post('http://localhost:8080/api/bills', newBill)
+        // Updated to use dynamic API_BASE_URL
+        axios.post(`${API_BASE_URL}/api/bills`, newBill)
             .then(() => {
                 alert("Bill Issued Successfully!");
                 setAmount('');
@@ -60,7 +63,8 @@ function ProviderDashboardScene() {
             message: noticeMsg
         };
 
-        axios.post('http://localhost:8080/api/notices', newNotice)
+        // Updated to use dynamic API_BASE_URL
+        axios.post(`${API_BASE_URL}/api/notices`, newNotice)
             .then(() => {
                 alert("Notice Posted Successfully!");
                 setNoticeMsg('');
@@ -71,7 +75,8 @@ function ProviderDashboardScene() {
     const handleDeleteAccount = () => {
         const confirmDelete = window.confirm("Are you sure? This will delete your PROVIDER account.");
         if (confirmDelete) {
-            axios.delete(`http://localhost:8080/api/auth/${providerName}`)
+            // Updated to use dynamic API_BASE_URL
+            axios.delete(`${API_BASE_URL}/api/auth/${providerName}`)
                 .then(() => {
                     alert("Provider Account Deleted.");
                     localStorage.clear();

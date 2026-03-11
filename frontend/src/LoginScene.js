@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
+import API_BASE_URL from './api';
 
 function LoginScene() {
     const navigate = useNavigate();
@@ -11,7 +12,8 @@ function LoginScene() {
     const [password, setPassword] = useState('');
     const [role, setRole] = useState('USER');
 
-    const handleAction = () => {
+    // Added 'async' so we can use modern await logic
+    const handleAction = async () => {
         if (!username || !password) {
             alert("Please enter both username and password.");
             return;
@@ -20,28 +22,34 @@ function LoginScene() {
         const userData = { username, password, role };
 
         if (isRegistering) {
-            axios.post('http://localhost:8080/api/auth/register', userData)
+            // Updated to use dynamic API_BASE_URL
+            axios.post(`${API_BASE_URL}/api/auth/register`, userData)
                 .then(() => {
                     alert("Registration Successful! Please Log In.");
                     setIsRegistering(false);
                 })
                 .catch(err => alert("Registration Failed: " + (err.response?.data || "Error")));
         } else {
-            axios.post('http://localhost:8080/api/auth/login', userData)
-                .then(response => {
-                    const user = response.data;
+            try {
+                // Updated to use axios and dynamic API_BASE_URL for the login request
+                const response = await axios.post(`${API_BASE_URL}/api/auth/login`, userData);
 
-                    localStorage.setItem('loggedInUser', user.username);
+                const user = response.data;
 
-                    if (user.role === 'ADMIN') {
-                        navigate('/admin');
-                    } else if (user.role === 'PROVIDER') {
-                        navigate('/provider');
-                    } else {
-                        navigate('/dashboard');
-                    }
-                })
-                .catch(() => alert("Invalid Username or Password"));
+                localStorage.setItem('loggedInUser', user.username);
+
+                // Role-based navigation
+                if (user.role === 'ADMIN') {
+                    navigate('/admin');
+                } else if (user.role === 'PROVIDER') {
+                    navigate('/provider');
+                } else {
+                    navigate('/dashboard');
+                }
+            } catch (err) {
+                alert("Invalid Username or Password");
+                console.error("Login error:", err);
+            }
         }
     };
 

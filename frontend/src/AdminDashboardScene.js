@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import API_BASE_URL from './api';
 
 function AdminDashboardScene() {
     const navigate = useNavigate();
@@ -15,14 +16,16 @@ function AdminDashboardScene() {
     }, []);
 
     const fetchAllUsers = () => {
-        axios.get('http://localhost:8080/api/auth/users')
+        // Updated to use dynamic API_BASE_URL
+        axios.get(`${API_BASE_URL}/api/auth/users`)
             .then(res => setUsers(res.data))
             .catch(err => console.error(err));
     };
 
     const deleteAccount = (username) => {
         if(window.confirm(`Delete account: ${username}?`)) {
-            axios.delete(`http://localhost:8080/api/auth/${username}`)
+            // Updated to use dynamic API_BASE_URL
+            axios.delete(`${API_BASE_URL}/api/auth/${username}`)
                 .then(() => fetchAllUsers())
                 .catch(err => alert("Error: " + err.message));
         }
@@ -31,13 +34,15 @@ function AdminDashboardScene() {
     const handleUserClick = (user) => {
         setSelectedEntity(user);
         setViewMode('USER_BILLS');
-        axios.get(`http://localhost:8080/api/bills/${user.username}`)
+        // Updated to use dynamic API_BASE_URL
+        axios.get(`${API_BASE_URL}/api/bills/${user.username}`)
             .then(res => setEntityItems(res.data))
             .catch(err => alert("Could not fetch bills"));
     };
 
     const deleteBill = (id) => {
-        axios.delete(`http://localhost:8080/api/bills/${id}`)
+        // Updated to use dynamic API_BASE_URL
+        axios.delete(`${API_BASE_URL}/api/bills/${id}`)
             .then(() => handleUserClick(selectedEntity)) // Refresh list
             .catch(err => alert("Error deleting bill"));
     };
@@ -45,13 +50,15 @@ function AdminDashboardScene() {
     const handleProviderClick = (user) => {
         setSelectedEntity(user);
         setViewMode('PROVIDER_NOTICES');
-        axios.get(`http://localhost:8080/api/notices/${user.username}`)
+        // Updated to use dynamic API_BASE_URL
+        axios.get(`${API_BASE_URL}/api/notices/${user.username}`)
             .then(res => setEntityItems(res.data))
             .catch(err => alert("Could not fetch notices"));
     };
 
     const deleteNotice = (id) => {
-        axios.delete(`http://localhost:8080/api/notices/${id}`)
+        // Updated to use dynamic API_BASE_URL
+        axios.delete(`${API_BASE_URL}/api/notices/${id}`)
             .then(() => handleProviderClick(selectedEntity)) // Refresh list
             .catch(err => alert("Error deleting notice"));
     };
